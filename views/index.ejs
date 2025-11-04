@@ -1,6 +1,8 @@
 <h1>Welcome to Innocent Motors!</h1>
 <div class="car">
-  <img src="https://dzowera.github.io/wdd131/images/my-picture.jpg" alt="hello">
+  <img src="../public/images/vehicles/batmobile-tn.jpg" alt="hello" loading="lazy">
+  
+  
 
   <div id="ad-box">
     <h1>DCM Delorean</h1>
@@ -9,16 +11,18 @@
     <h2>Fuzzy dice!</h2>
     <button>Own Today</button>
   </div>
+
 </div>
 
-<div class="reviews">
+<div class="outer-container">
+  <div class="reviews">
   <h2>DMC Delorean Reviews</h2>
   <ul>
-    <li>Lorem ipsum dolor sit amet.</li>
-    <li>Lorem ipsum dolor sit amet.</li>
-    <li>Lorem ipsum dolor sit amet.</li>
-    <li>Lorem ipsum dolor sit amet.</li>
-    <li>Lor em ipsum dolor sit amet.</li>
+    <li>"So fast it is almost like travelling in time." (4/5)</li>
+    <li>"Coolest ride on the road." (4/5)</li>
+    <li>"I am feeling McFly!" (5/5)</li>
+    <li>"The most futuristic ride of our day" (4.5/5) </li>
+    <li>"80's livin and I love it" (5/5)</li>
   </ul>
   
 </div>
@@ -28,44 +32,61 @@
   <div class="accessories-container">
 
     <div class="items">
-      <img src="Hello" alt="ge">
+      <img src="https://dzowera.github.io/wdd131/images/my-picture.jpg" alt="ge">
       <a href="#">Hello</a>
     </div>
 
     <div class="items">
-      <img src="Hello" alt="ge">
+      <img src="https://dzowera.github.io/wdd131/images/my-picture.jpg" alt="ge">
       <a href="#">Hello</a>
     </div>
 
     <div class="items">
-      <img src="Hello" alt="ge">
+      <img src="https://dzowera.github.io/wdd131/images/my-picture.jpg" alt="ge">
       <a href="#">Hello</a>
     </div>
 
     <div class="items">
-      <img src="Hello" alt="ge">
+      <img src="https://dzowera.github.io/wdd131/images/my-picture.jpg" alt="ge">
       <a href="#">Hello</a>
     </div>
   </div>
   
 </div>
+</div>
+
+
 
 
 
 <style>
+  body{
+    background-color: rgb(225, 225, 225);
+  }
+
+  h1{
+    font-size: 20px;
+  }
+  
   .car{
     position: relative;
   }
+
+  .car img{
+    width: 100%;
+    /* object-fit: contain; */
+  }
+
   #ad-box{
     position: absolute;
     bottom: 20px;
-    left: 20px;
+    left: 30px;
     padding: 20px;
     color: blue;
-   
     background-color: rgba(255, 255, 255, 0.8);
-    
+    font-size: 8px;
   }
+
   #ad-box button{
     background-color: blue;
     color: black;
@@ -80,9 +101,53 @@
     grid-template-columns: 100px 100px;
     column-gap: 20px;
     row-gap: 20px;
+    text-align: center;
+  }
+  
+  .items{
+    height: 100px;
+    width: 100px;
+    text-align: center;
+  }
+
+  .items img{
+    width: 90px;
+    display: block;
+    background-color: blue;
+    padding: 20px;
+    
   }
   .items a{
     text-decoration: underline;
     color: blue;
+  }
+
+  @media only screen and (min-width: 701px){
+     h1{
+      font-size: large;
+    }
+    .car{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .car img{
+      width: 75%;
+    }
+    #ad-box{
+      font-size: 12px;
+    }
+    .outer-container{
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-around;
+    }
+    #ad-box{
+      left: 200px;
+    }
+
+    .reviews ul li{
+    margin-bottom: 35px;
+    }
   }
 </style>
