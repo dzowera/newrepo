@@ -71,6 +71,7 @@ nav ul{
   #ad-box button{
     background-color: blue;
     color: black;
+    font-weight: bold;
     border: none;
     padding: 10px;
     margin: 0 auto;
