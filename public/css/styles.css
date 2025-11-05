@@ -39,7 +39,7 @@ nav ul{
     cursor: pointer;
   }
 
-  /* the main content */
+  /* The Main Content */
 
   body{
     background-color: rgb(225, 225, 225);
@@ -60,12 +60,12 @@ nav ul{
 
   #ad-box{
     position: absolute;
-    bottom: 20px;
-    left: 30px;
+    bottom: 15px;
+    left: 15px;
     padding: 20px;
     color: blue;
     background-color: rgba(255, 255, 255, 0.8);
-    font-size: 8px;
+    font-size: 6px;
   }
 
   #ad-box button{
@@ -81,7 +81,7 @@ nav ul{
     display: grid;
     grid-template-columns: 100px 100px;
     column-gap: 20px;
-    row-gap: 20px;
+    row-gap: 30px;
     text-align: center;
   }
   
@@ -93,6 +93,8 @@ nav ul{
 
   .items img{
     width: 90px;
+    height: 90px;
+    object-fit: contain;
     display: block;
     background-color: blue;
     padding: 20px;
@@ -101,6 +103,7 @@ nav ul{
   .items a{
     text-decoration: underline;
     color: blue;
+    white-space: nowrap;
   }
 
 
