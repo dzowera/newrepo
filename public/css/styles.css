@@ -39,6 +39,10 @@ nav ul{
     cursor: pointer;
   }
 
+  nav a{
+    color: white;
+  }
+
   /* The Main Content */
 
   body{

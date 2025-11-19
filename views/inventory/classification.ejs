@@ -1,0 +1,11 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!-- we will add this later -->
+<%# messages() %>
+
+<!-- We built the logic already, and the id and class are there already -->
+<%- grid %>
