@@ -60,13 +60,11 @@ app.use(async (err, req, res, next) => {
  * Values from .env (environment) file
  *************************/
 const port = process.env.PORT || 5500
-// const host = process.env.HOST
+const host = process.env.HOST
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`)
+  console.log(`app listening on ${host}:${port}`)
 })
-
