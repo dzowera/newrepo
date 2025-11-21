@@ -4,150 +4,119 @@
 *:after {
   box-sizing: border-box;
 }
+
 /* ----------- The Header ---------- */
-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  a{
-    text-decoration: none;
-    color: black;
-  }
-  .siteName a{
-    text-decoration: none;
-    font-size: 30px;
-    font-weight: bold;
-  }
-  #tools a{
-    font-weight: bold;
-  }
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
-/* ---------- Navigation -----------*/
-nav ul{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: white;
-    background-color: black;
-    height: 40px;
-  }
-  nav ul li{
-    list-style: none;
-    margin: 0;
-    cursor: pointer;
-  }
+a {
+  text-decoration: none;
+  color: black;
+}
 
-  nav a{
-    color: white;
-  }
+.siteName a {
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: bold;
+}
 
-  /* The Main Content */
+#tools a {
+  font-weight: bold;
+}
 
-  body{
-    background-color: rgb(225, 225, 225);
-    font-family: 'Roboto', sans-serif;
-  }
+/* ---------- Navigation ----------- */
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  background-color: black;
+  height: 40px;
+}
 
-  h1{
-    font-size: 20px;
-  }
-  
-  .car{
-    position: relative;
-  }
+nav ul li {
+  list-style: none;
+  margin: 0;
+  cursor: pointer;
+}
 
-  .car img{
-    width: 100%;
-    /* object-fit: contain; */
-  }
+nav a {
+  color: white;
+}
 
-  #ad-box{
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    padding: 20px;
-    color: blue;
-    background-color: rgba(255, 255, 255, 0.8);
-    font-size: 6px;
-  }
+/* ---------- The Main Content ---------- */
+body {
+  background-color: rgb(225, 225, 225);
+  font-family: 'Roboto', sans-serif;
+}
 
-  #ad-box button{
-    background-color: blue;
-    color: white;
-    font-weight: bold;
-    border: none;
-    padding: 10px;
-    margin: 0 auto;
-    display: block;
-  }
-  
-  .accessories-container{
-    display: grid;
-    grid-template-columns: 100px 100px;
-    column-gap: 20px;
-    row-gap: 30px;
-    text-align: center;
-  }
-  
-  .items{
-    height: 100px;
-    width: 100px;
-    text-align: center;
-  }
+h1 {
+  font-size: 20px;
+}
 
-  .items img{
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    display: block;
-    background-color: blue;
-    padding: 20px;
-    
-  }
-  .items a{
-    text-decoration: underline;
-    color: blue;
-    white-space: nowrap;
-  }
+.car {
+  position: relative;
+}
 
+.car img {
+  width: 100%;
+  /* object-fit: contain; */
+}
 
-  /* LARGE SIZE */
-  @media only screen and (min-width: 701px){
-     h1{
-      font-size: large;
-    }
-    .car{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .car img{
-      width: 75%;
-    }
-    #ad-box{
-      font-size: 12px;
-    }
-    .outer-container{
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: space-around;
-    }
-    #ad-box{
-      left: 200px;
-    }
+#ad-box {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 20px;
+  color: blue;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 6px;
+}
 
-    .reviews ul li{
-    margin-bottom: 35px;
-    }
-  }
+#ad-box button {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  margin: 0 auto;
+  display: block;
+}
 
-  
+.accessories-container {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  column-gap: 20px;
+  row-gap: 30px;
+  text-align: center;
+}
 
+.items {
+  height: 100px;
+  width: 100px;
+  text-align: center;
+}
 
+.items img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  display: block;
+  background-color: blue;
+  padding: 20px;
+}
 
-  /* Vehicle Detail Page Styling */
+.items a {
+  text-decoration: underline;
+  color: blue;
+  white-space: nowrap;
+}
+
+/* ---------- Vehicle Detail Page Styling ---------- */
 .vehicle-detail {
   max-width: 1000px;
   margin: 2rem auto;
@@ -198,7 +167,109 @@ nav ul{
   color: #222;
 }
 
-/* Responsive layout */
+/* ---------- Classification Grid Styling ---------- */
+#inv-display {
+  display: grid;
+  grid-template-columns: 1fr; /* default: single column on small screens */
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+#inv-display li {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#inv-display li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+#inv-display img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+.namePrice {
+  padding: 1rem;
+  text-align: center;
+}
+
+.namePrice h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.namePrice a {
+  text-decoration: none;
+  color: #333;
+}
+
+.namePrice a:hover {
+  color: #0077cc;
+}
+
+.namePrice span {
+  display: block;
+  font-weight: bold;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+/* Notice message styling */
+.notice {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 2rem;
+}
+
+/* ---------- Media Queries Grouped ---------- */
+@media only screen and (min-width: 701px) {
+  h1 {
+    font-size: large;
+  }
+
+  .car {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .car img {
+    width: 75%;
+  }
+
+  #ad-box {
+    font-size: 12px;
+    left: 200px;
+  }
+
+  .outer-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+  }
+
+  .reviews ul li {
+    margin-bottom: 35px;
+  }
+
+  /* Classification grid: always 3 columns on large screens */
+  #inv-display {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .vehicle-container {
     flex-direction: column;

@@ -30,11 +30,11 @@ async function buildById(req, res, next) {
     }
 
     const html = utilities.buildVehicleDetailHTML(vehicleData)
-    const nav = await utilities.getNav()   // ✅ build the nav
+    const nav = await utilities.getNav()   // build the nav
 
     res.render("inventory/details", {
       title: `${vehicleData.inv_make} ${vehicleData.inv_model}`,
-      nav,                                // ✅ pass nav to the view
+      nav,                                //  pass nav to the view
       content: html
     })
   } catch (error) {
