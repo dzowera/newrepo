@@ -12,4 +12,7 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Route to build register view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
+// Route to process registration form
+router.post("/register", utilities.handleErrors(accountController.registerAccount));
+
 module.exports = router;

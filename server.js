@@ -20,6 +20,8 @@ const utilities = require("./utilities/") // utilities in scope
 // Require the account route
 const accountRoute = require("./routes/accountRoute");
 
+const bodyParser = require("body-parser")
+
 // Use the account route
 app.use("/account", accountRoute);
 // Account routes
@@ -53,6 +55,10 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 // Serve static files (CSS, images, JS)
 app.use(express.static("public"))
 
