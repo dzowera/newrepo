@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include("../partials/header") %>
+
+  <main>
+    <h1><%= title %></h1>
+
+    <!-- Flash messages -->
+    
+
+    <!-- Registration form -->
+    <form action="/account/register" method="post" class="register-form">
+      <label for="account_firstname">First Name:</label>
+      <input type="text" id="account_firstname" name="account_firstname" 
+             value="<%= typeof account_firstname != 'undefined' ? account_firstname : '' %>" required>
+
+      <label for="account_lastname">Last Name:</label>
+      <input type="text" id="account_lastname" name="account_lastname" 
+             value="<%= typeof account_lastname != 'undefined' ? account_lastname : '' %>" required>
+
+      <label for="account_email">Email Address:</label>
+      <input type="email" id="account_email" name="account_email" 
+             value="<%= typeof account_email != 'undefined' ? account_email : '' %>" required>
+
+      <label for="account_password">Password:</label>
+      <input type="password" id="account_password" name="account_password" required
+             placeholder="At least 12 chars, 1 capital, 1 number, 1 special">
+
+      <!-- Optional toggle password visibility -->
+      <button type="button" onclick="togglePassword()">Show/Hide Password</button>
+
+      <button type="submit">Register</button>
+    </form>
+  </main>
+
+  <%- include("../partials/footer") %>
+
+  <script>
+    function togglePassword() {
+      const pwd = document.getElementById("account_password");
+      pwd.type = pwd.type === "password" ? "text" : "password";
+    }
+  </script>
+</body>
+</html>

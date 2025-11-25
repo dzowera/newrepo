@@ -22,6 +22,8 @@ const accountRoute = require("./routes/accountRoute");
 
 // Use the account route
 app.use("/account", accountRoute);
+// Account routes
+app.use("/account", require("./routes/accountRoute"))
 
 /* ***********************
  * View Engine and Templates
