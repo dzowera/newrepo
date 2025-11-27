@@ -42,4 +42,46 @@ async function buildById(req, res, next) {
   }
 }
 
-module.exports = { buildByClassificationId, buildById }
+/* ***************************
+ *  Build inventory management view
+ * ************************** */
+async function buildManagementView(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/management", {
+    title: "Inventory Management",
+    nav,
+    message: req.flash("notice")
+  })
+}
+
+/* ***************************
+ *  Build add classification view
+ * ************************** */
+async function buildAddClassification(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    message: req.flash("notice")
+  })
+}
+
+/* ***************************
+ *  Build add inventory view
+ * ************************** */
+async function buildAddInventory(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+    message: req.flash("notice")
+  })
+}
+
+module.exports = { 
+  buildByClassificationId, 
+  buildById, 
+  buildManagementView, 
+  buildAddClassification, 
+  buildAddInventory 
+}

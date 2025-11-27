@@ -1,0 +1,10 @@
+<h1><%= title %></h1>
+
+<form action="/inv/add-classification" method="post" class="form-card">
+  <label for="classification_name">Classification Name</label>
+  <input type="text" id="classification_name" name="classification_name"
+         value="<%= typeof classification_name != 'undefined' ? classification_name : '' %>"
+         required>
+
+  <button type="submit" class="btn">Add Classification</button>
+</form>
