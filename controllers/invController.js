@@ -9,7 +9,10 @@ async function buildByClassificationId(req, res, next) {
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
-  const className = data[0].classification_name
+  let className = "No Vehicles Found"
+  if (data.length > 0) {
+    className = data[0].classification_name
+  }
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
@@ -30,11 +33,11 @@ async function buildById(req, res, next) {
     }
 
     const html = utilities.buildVehicleDetailHTML(vehicleData)
-    const nav = await utilities.getNav()   // build the nav
+    const nav = await utilities.getNav()
 
     res.render("inventory/details", {
       title: `${vehicleData.inv_make} ${vehicleData.inv_model}`,
-      nav,                                //  pass nav to the view
+      nav,
       content: html
     })
   } catch (error) {
@@ -77,7 +80,7 @@ async function addClassification(req, res, next) {
     const result = await invModel.addClassification(classification_name)
     if (result) {
       req.flash("notice", "Classification added successfully.")
-      const newNav = await utilities.getNav() // rebuild nav with new classification
+      const newNav = await utilities.getNav()
       res.render("inventory/management", {
         title: "Inventory Management",
         nav: newNav,
@@ -121,7 +124,7 @@ async function buildAddInventory(req, res, next) {
  *  Process add inventory form
  * ************************** */
 async function addInventory(req, res, next) {
-  const {
+  let {
     inv_make,
     inv_model,
     inv_year,
@@ -133,6 +136,10 @@ async function addInventory(req, res, next) {
     inv_image,
     inv_thumbnail
   } = req.body
+
+  // Ensure defaults for image paths
+  inv_image = inv_image && inv_image.trim() !== "" ? inv_image : "/images/no-image.png"
+  inv_thumbnail = inv_thumbnail && inv_thumbnail.trim() !== "" ? inv_thumbnail : "/images/no-image-tn.png"
 
   let nav = await utilities.getNav()
   const classificationList = await utilities.buildClassificationList(classification_id)
@@ -197,12 +204,12 @@ async function addInventory(req, res, next) {
   }
 }
 
-module.exports = { 
-  buildByClassificationId, 
-  buildById, 
-  buildManagementView, 
-  buildAddClassification, 
-  addClassification,       
+module.exports = {
+  buildByClassificationId,
+  buildById,
+  buildManagementView,
+  buildAddClassification,
+  addClassification,
   buildAddInventory,
-  addInventory              // <-- new export
+  addInventory
 }
