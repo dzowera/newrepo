@@ -38,4 +38,20 @@ router.get(
   utilities.handleErrors(invController.buildAddInventory)
 )
 
+// Route to process add classification form
+router.post(
+  "/add-classification",
+  utilities.classificationRules(), // server-side validation rules
+  utilities.checkClassificationData, // middleware to check validation results
+  utilities.handleErrors(invController.addClassification)
+)
+
+// Route to process add inventory form
+router.post(
+  "/add-inventory",
+  utilities.inventoryRules(),       // server-side validation rules
+  utilities.checkInventoryData,     // middleware to check validation results
+  utilities.handleErrors(invController.addInventory)
+)
+
 module.exports = router

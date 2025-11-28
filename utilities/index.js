@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const { body, validationResult } = require("express-validator")
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -109,9 +110,139 @@ function buildVehicleDetailHTML(vehicle) {
   `
 }
 
+/* ****************************************
+ * Build classification select list
+ **************************************** */
+async function buildClassificationList(classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (classification_id != null && row.classification_id == classification_id) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  return classificationList
+}
+
+/* ****************************************
+ * Validation Rules for Classification
+ **************************************** */
+function classificationRules() {
+  return [
+    body("classification_name")
+      .trim()
+      .isAlphanumeric()
+      .withMessage("Classification name must contain only letters and numbers.")
+      .notEmpty()
+      .withMessage("Classification name is required.")
+  ]
+}
+
+/* ****************************************
+ * Check Classification Data and Return Errors
+ **************************************** */
+async function checkClassificationData(req, res, next) {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const nav = await getNav()
+    res.render("inventory/add-classification", {
+      title: "Add New Classification",
+      nav,
+      message: req.flash("notice"),
+      errors: errors.array(),
+      classification_name: req.body.classification_name
+    })
+    return
+  }
+  next()
+}
+
+/* ****************************************
+ * Validation Rules for Inventory
+ **************************************** */
+function inventoryRules() {
+  return [
+    body("inv_make")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Make is required."),
+    body("inv_model")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Model is required."),
+    body("inv_year")
+      .isInt({ min: 1900, max: 2099 })
+      .withMessage("Year must be a valid number."),
+    body("inv_price")
+      .isFloat({ min: 0 })
+      .withMessage("Price must be a positive number."),
+    body("inv_miles")
+      .isInt({ min: 0 })
+      .withMessage("Mileage must be a positive integer."),
+    body("inv_color")
+      .trim()
+      .isAlpha()
+      .withMessage("Color must contain only letters."),
+    body("inv_description")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Description is required."),
+    body("classification_id")
+      .isInt()
+      .withMessage("Classification is required."),
+    body("inv_image")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Image path is required."),
+    body("inv_thumbnail")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Thumbnail path is required.")
+  ]
+}
+
+/* ****************************************
+ * Check Inventory Data and Return Errors
+ **************************************** */
+async function checkInventoryData(req, res, next) {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    const nav = await getNav()
+    const classificationList = await buildClassificationList(req.body.classification_id)
+    res.render("inventory/add-inventory", {
+      title: "Add New Inventory",
+      nav,
+      classificationList,
+      message: req.flash("notice"),
+      errors: errors.array(),
+      inv_make: req.body.inv_make,
+      inv_model: req.body.inv_model,
+      inv_year: req.body.inv_year,
+      inv_price: req.body.inv_price,
+      inv_miles: req.body.inv_miles,
+      inv_color: req.body.inv_color,
+      inv_description: req.body.inv_description,
+      inv_image: req.body.inv_image,
+      inv_thumbnail: req.body.inv_thumbnail
+    })
+    return
+  }
+  next()
+}
+
 module.exports = {
   getNav,
   buildClassificationGrid,
   handleErrors,
   buildVehicleDetailHTML,
+  buildClassificationList,
+  classificationRules,
+  checkClassificationData,
+  inventoryRules,
+  checkInventoryData
 }

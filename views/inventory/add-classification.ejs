@@ -1,9 +1,24 @@
 <h1><%= title %></h1>
 
+<!-- Flash messages -->
+
+<!-- Server-side validation errors -->
+<% if (typeof errors != 'undefined' && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<p>Please enter a classification name. It must not contain spaces or special characters.</p>
+
 <form action="/inv/add-classification" method="post" class="form-card">
   <label for="classification_name">Classification Name</label>
   <input type="text" id="classification_name" name="classification_name"
          value="<%= typeof classification_name != 'undefined' ? classification_name : '' %>"
+         pattern="^[A-Za-z0-9]+$"
+         title="Only letters and numbers allowed, no spaces or special characters"
          required>
 
   <button type="submit" class="btn">Add Classification</button>
