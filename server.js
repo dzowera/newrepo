@@ -1,5 +1,6 @@
 const session = require("express-session");
 const pool = require("./database/");
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 require("dotenv").config();
@@ -14,7 +15,9 @@ const accountRoute = require("./routes/accountRoute");
 // View Engine and Templates
 app.set("view engine", "ejs");
 app.use(expressLayouts);
+app.use(cookieParser());
 app.set("layout", "./layouts/layout");
+app.use(utilities.checkJWTToken);
 
 // Middleware
 app.use(session({

@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const { body, validationResult } = require("express-validator")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -72,7 +74,7 @@ async function buildClassificationGrid(data) {
     })
     grid += "</ul>"
   } else {
-    grid +=
+    grid =
       '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
@@ -120,7 +122,10 @@ async function buildClassificationList(classification_id = null) {
   classificationList += "<option value=''>Choose a Classification</option>"
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"'
-    if (classification_id != null && row.classification_id == classification_id) {
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
       classificationList += " selected "
     }
     classificationList += ">" + row.classification_name + "</option>"
@@ -137,9 +142,11 @@ function classificationRules() {
     body("classification_name")
       .trim()
       .isAlphanumeric()
-      .withMessage("Classification name must contain only letters and numbers.")
+      .withMessage(
+        "Classification name must contain only letters and numbers."
+      )
       .notEmpty()
-      .withMessage("Classification name is required.")
+      .withMessage("Classification name is required."),
   ]
 }
 
@@ -155,7 +162,7 @@ async function checkClassificationData(req, res, next) {
       nav,
       message: req.flash("notice"),
       errors: errors.array(),
-      classification_name: req.body.classification_name
+      classification_name: req.body.classification_name,
     })
     return
   }
@@ -202,7 +209,7 @@ function inventoryRules() {
     body("inv_thumbnail")
       .trim()
       .isLength({ min: 1 })
-      .withMessage("Thumbnail path is required.")
+      .withMessage("Thumbnail path is required."),
   ]
 }
 
@@ -213,7 +220,9 @@ async function checkInventoryData(req, res, next) {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     const nav = await getNav()
-    const classificationList = await buildClassificationList(req.body.classification_id)
+    const classificationList = await buildClassificationList(
+      req.body.classification_id
+    )
     res.render("inventory/add-inventory", {
       title: "Add New Inventory",
       nav,
@@ -228,11 +237,35 @@ async function checkInventoryData(req, res, next) {
       inv_color: req.body.inv_color,
       inv_description: req.body.inv_description,
       inv_image: req.body.inv_image,
-      inv_thumbnail: req.body.inv_thumbnail
+      inv_thumbnail: req.body.inv_thumbnail,
     })
     return
   }
   next()
+}
+
+/* ****************************************
+ * Middleware to check token validity
+ **************************************** */
+function checkJWTToken(req, res, next) {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("notice", "Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      }
+    )
+  } else {
+    next()
+  }
 }
 
 module.exports = {
@@ -244,5 +277,6 @@ module.exports = {
   classificationRules,
   checkClassificationData,
   inventoryRules,
-  checkInventoryData
+  checkInventoryData,
+  checkJWTToken,
 }
