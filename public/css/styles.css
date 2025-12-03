@@ -445,3 +445,31 @@ textarea {
 .btn:hover {
   background-color: #0b5ed7;
 }
+
+/* Inventory Management Table Styling */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-family: Arial, sans-serif;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+#inventoryDisplay th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+#inventoryDisplay tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+#inventoryDisplay tr:hover {
+  background-color: #e6f7ff;
+}

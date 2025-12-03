@@ -54,4 +54,18 @@ router.post(
   utilities.handleErrors(invController.addInventory)
 )
 
+// Route to return inventory JSON by classification
+router.get(
+  "/getInventory/:classificationId",
+  utilities.handleErrors(invController.getInventoryJSON)
+)
+
+/* ****************************************
+* Route to deliver edit inventory view
+**************************************** */
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+)
+
 module.exports = router

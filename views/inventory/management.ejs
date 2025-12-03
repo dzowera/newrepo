@@ -1,11 +1,29 @@
-<h1><%= title %></h1>
+<%- include('../partials/header') %>
 
 
-<section class="card">
+<main>
+  <h1>Inventory Management</h1>
+
+  <!-- Links to add new classification or inventory -->
+  <p>
+    <a href="/inv/add-classification">Add New Classification</a> |
+    <a href="/inv/add-inventory">Add New Vehicle</a>
+  </p>
+
   <h2>Manage Inventory</h2>
-  <p>Select an action below:</p>
-  <ul class="link-list">
-    <li><a href="/inv/add-classification">Add New Classification</a></li>
-    <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
-  </ul>
-</section>
+  <p>Select a classification from the list to see the items belonging to that classification.</p>
+
+  <!-- Classification select list injected from controller -->
+  <form id="classificationForm">
+    <%- classificationSelect %>
+  </form>
+
+  <!-- Empty table for inventory items -->
+  <table id="inventoryDisplay"></table>
+
+  <!-- Fallback if JavaScript is disabled -->
+  <noscript>JavaScript must be enabled to use this page.</noscript>
+</main>
+<script src="../../js/inventory.js"></script>
+
+<%- include('../partials/footer') %>
