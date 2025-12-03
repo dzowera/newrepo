@@ -13,9 +13,8 @@
     </ul>
   <% } %>
 
-  <form action="/inv/update" method="post">
+  <form id="updateForm" action="/inv/update" method="post">
     <!-- Hidden field to carry the inventory id -->
-    <input type="hidden" name="inv_id" value="<%= inv_id %>">
 
     <label for="inv_make">Make</label>
     <input type="text" id="inv_make" name="inv_make" value="<%= inv_make %>" required>
@@ -45,10 +44,13 @@
     <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
 
     <label for="classification_id">Classification</label>
-    <%= classificationSelect %>
+    <%- classificationSelect %>
 
-    <button type="submit">Update Vehicle</button>
+    <button id="updateBtn" type="submit" disabled>Update Vehicle</button>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
   </form>
 </main>
-
+<script src="/js/inv-update.js"></script>
 <%- include('../partials/footer') %>

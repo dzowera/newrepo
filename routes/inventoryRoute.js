@@ -68,4 +68,14 @@ router.get(
   utilities.handleErrors(invController.editInventoryView)
 )
 
+/* ****************************************
+* Route to process inventory update
+**************************************** */
+router.post(
+  "/update",
+  utilities.newInventoryRules(),
+  utilities.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+)
+
 module.exports = router
