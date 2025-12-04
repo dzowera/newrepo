@@ -3,7 +3,7 @@
     <a href="/" title="Return to home page">Innocent Motors</a>
   </span>
   <div id="tools">
-    <% if (loggedin) { %>
+    <% if (loggedin && accountData && accountData.account_firstname) { %>
       <a href="/account/">Welcome <%= accountData.account_firstname %></a>
       <a href="/account/logout">Logout</a>
     <% } else { %>

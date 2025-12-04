@@ -1,14 +1,11 @@
-<%- include('../partials/header') %>
-<%- include('../partials/nav') %>
-
 <main>
   <h1><%= title %></h1>
 
-  <% if (loggedin && accountData.account_type === "Client") { %>
+  <% if (loggedin && accountData && accountData.account_type === "Client") { %>
     <h2>Welcome <%= accountData.account_firstname %></h2>
     <p><a href="/account/update/<%= accountData.account_id %>">Update Account Information</a></p>
 
-  <% } else if (loggedin && (accountData.account_type === "Employee" || accountData.account_type === "Admin")) { %>
+  <% } else if (loggedin && accountData && (accountData.account_type === "Employee" || accountData.account_type === "Admin")) { %>
     <h2>Welcome <%= accountData.account_firstname %></h2>
     <p><a href="/account/update/<%= accountData.account_id %>">Update Account Information</a></p>
 
@@ -20,5 +17,3 @@
     <p><a href="/account/login">Login here</a></p>
   <% } %>
 </main>
-
-<%- include('../partials/footer') %>
