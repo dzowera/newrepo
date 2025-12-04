@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<main>
+  <h1><%= title %></h1>
+
+  <!-- Display errors -->
+  <% if (errors && errors.length > 0) { %>
+    <ul class="errors">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <!-- Display flash messages -->
+  <% if (messages && messages.notice) { %>
+    <p class="notice"><%= messages.notice %></p>
+  <% } %>
+
+  <section>
+    <h2>Account Update</h2>
+    <form action="/account/update" method="post">
+      <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+      <label for="account_firstname">First Name</label>
+      <input type="text" id="account_firstname" name="account_firstname"
+             value="<%= accountData.account_firstname %>" required>
+
+      <label for="account_lastname">Last Name</label>
+      <input type="text" id="account_lastname" name="account_lastname"
+             value="<%= accountData.account_lastname %>" required>
+
+      <label for="account_email">Email</label>
+      <input type="email" id="account_email" name="account_email"
+             value="<%= accountData.account_email %>" required>
+
+      <input type="submit" value="Update Account">
+    </form>
+  </section>
+
+  <section>
+    <h2>Change Password</h2>
+    <p>Enter a new password to replace your current one. 
+       Passwords must be at least 8 characters long and include a mix of letters, numbers, and symbols.</p>
+
+    <form action="/account/update-password" method="post">
+      <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+      <label for="account_password">New Password</label>
+      <input type="password" id="account_password" name="account_password" required>
+
+      <input type="submit" value="Change Password">
+    </form>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

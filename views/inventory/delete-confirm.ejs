@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<main>
+  <h1><%= title %></h1>
+  <p>Confirm deletion — this action is permanent and cannot be undone.</p>
+
+  <% if (messages && messages.notice) { %>
+    <p class="notice"><%= messages.notice %></p>
+  <% } %>
+
+  <form action="/inv/delete" method="post">
+    <!-- Keep the hidden id -->
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+    <!-- Minimal, readonly confirmation fields -->
+    <label for="inv_make">Make</label>
+    <input type="text" id="inv_make" value="<%= inv_make %>" readonly>
+
+    <label for="inv_model">Model</label>
+    <input type="text" id="inv_model" value="<%= inv_model %>" readonly>
+
+    <label for="inv_year">Year</label>
+    <input type="number" id="inv_year" value="<%= inv_year %>" readonly>
+
+    <label for="inv_price">Price</label>
+    <input type="number" id="inv_price" value="<%= inv_price %>" readonly>
+
+    <button type="submit" class="danger">Delete</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

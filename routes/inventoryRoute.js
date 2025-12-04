@@ -29,18 +29,21 @@ router.get(
 // Route to deliver add new classification view
 router.get(
   "/add-classification",
+   utilities.checkAccountType,
   utilities.handleErrors(invController.buildAddClassification)
 )
 
 // Route to deliver add new inventory view
 router.get(
   "/add-inventory",
+   utilities.checkAccountType,
   utilities.handleErrors(invController.buildAddInventory)
 )
 
 // Route to process add classification form
 router.post(
   "/add-classification",
+   utilities.checkAccountType,
   utilities.classificationRules(), // server-side validation rules
   utilities.checkClassificationData, // middleware to check validation results
   utilities.handleErrors(invController.addClassification)
@@ -49,6 +52,7 @@ router.post(
 // Route to process add inventory form
 router.post(
   "/add-inventory",
+   utilities.checkAccountType,
   utilities.inventoryRules(),       // server-side validation rules
   utilities.checkInventoryData,     // middleware to check validation results
   utilities.handleErrors(invController.addInventory)
@@ -65,6 +69,7 @@ router.get(
 **************************************** */
 router.get(
   "/edit/:inv_id",
+   utilities.checkAccountType,
   utilities.handleErrors(invController.editInventoryView)
 )
 
@@ -73,9 +78,25 @@ router.get(
 **************************************** */
 router.post(
   "/update",
+  utilities.checkAccountType,
   utilities.newInventoryRules(),
   utilities.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
 )
+
+// to handle deletetion
+router.get(
+  "/delete/:inv_id",
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.buildDeleteConfirm)
+)
+
+// Carry out deletion (POST)
+router.post(
+  "/delete",
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.deleteInventory)
+)
+
 
 module.exports = router
