@@ -1,0 +1,13 @@
+<h1>My Messages</h1>
+<% if (messages.length > 0) { %>
+  <ul>
+    <% messages.forEach(msg => { %>
+      <li>
+        <strong><%= msg.subject %></strong> - <%= msg.body %>
+        <em>(<%= msg.created_at.toLocaleString() %>)</em>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No messages yet.</p>
+<% } %>

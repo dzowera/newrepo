@@ -78,3 +78,13 @@ UPDATE public.inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/')
 WHERE inv_image LIKE '/images/%' OR inv_thumbnail LIKE '/images/%';
+
+
+-- Contact Messages table
+CREATE TABLE public.contact_messages (
+  message_id SERIAL PRIMARY KEY,
+  account_id INT REFERENCES public.account(account_id),
+  subject VARCHAR(255) NOT NULL,
+  body TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

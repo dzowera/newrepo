@@ -6,11 +6,14 @@ const expressLayouts = require("express-ejs-layouts")
 require("dotenv").config()
 
 const app = express()
+
+// Routes and controllers
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 const accountRoute = require("./routes/accountRoute")
+const contactRoute = require("./routes/contactRoute")
 
 // View Engine and Templates
 app.set("view engine", "ejs")
@@ -37,7 +40,7 @@ app.use((req, res, next) => {
   next()
 })
 
-// ✅ Ensure loggedin and accountData are always defined BEFORE routes
+// Ensure loggedin and accountData are always defined BEFORE routes
 app.use((req, res, next) => {
   if (typeof res.locals.loggedin === "undefined") {
     res.locals.loggedin = 0
@@ -62,6 +65,9 @@ app.use("/account", accountRoute)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 app.get("/error", utilities.handleErrors(baseController.throwError))
+
+// contact route
+app.use("/contact", contactRoute)
 
 // 404 handler
 app.use(async (req, res, next) => {
